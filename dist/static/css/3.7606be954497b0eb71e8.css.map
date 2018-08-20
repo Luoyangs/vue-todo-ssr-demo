@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./client/components/common-footer.vue?96f1"],"names":[],"mappings":";AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA","file":"static/css/3.7606be954497b0eb71e8.css","sourcesContent":["\n.footer {\n  position: absolute;\n  bottom: 100px;\n  width: 100%;\n  font-size: 20px;\n  color: #666;\n  text-align: center;\n}\n"],"sourceRoot":""}

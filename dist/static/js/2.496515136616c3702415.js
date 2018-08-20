@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{dLsH:function(n,t,e){},nNA7:function(n,t,e){"use strict";var s=e("dLsH");e.n(s).a},rC7t:function(n,t,e){"use strict";e.r(t);var s=function(){var n=this.$createElement;return(this._self._c||n)("div",{staticClass:"header"},[this._v("TODO LIST")])};s._withStripped=!0;e("nNA7");var i=e("KHd+"),c=Object(i.a)({},s,[],!1,null,null,null);c.options.__file="client/components/common-header.vue";t.default=c.exports}}]);
+//# sourceMappingURL=2.496515136616c3702415.js.map

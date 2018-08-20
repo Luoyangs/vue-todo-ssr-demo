@@ -1,0 +1,8 @@
+# dependencies
+node_modules
+
+# mac
+.DS_Store
+
+package-lock.json
+.cache-loader

@@ -1,0 +1,35 @@
+
+.todo-list {
+  position: relative;
+  top: 120px;
+  width: 80%;
+  margin: 0 auto;
+  max-width: 1000px;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  overflow: hidden;
+  z-index: 99;
+  box-shadow: 10px 10px 5px #9a9a9a;
+}
+.todo-list .input__wrapper {
+    border-bottom: 1px solid #f2f2f2;
+}
+.todo-list .input-class, .todo-list .input-subclass {
+    width: 100%;
+    overflow: hidden;
+    display: block;
+    line-height: 40px;
+    font-size: 20px;
+    border: none;
+    outline: medium;
+    text-indent: 4em;
+}
+.todo-list .input-subclass {
+    font-size: 14px;
+    line-height: 28px;
+    text-indent: 5.8em;
+}
+
+
+/*# sourceMappingURL=4.2a49d6efd1ddbc30d862.css.map*/

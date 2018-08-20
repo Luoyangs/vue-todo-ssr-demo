@@ -1,0 +1,23 @@
+
+.list-filter-tabs {
+  display: block;
+  overflow: hidden;
+  margin-left: -20px;
+}
+.list-filter-tabs .filter-tab {
+    display: inline-block;
+    float: left;
+    padding: 12px;
+}
+.list-filter-tabs .filter-tab.active {
+      border-bottom: 1px solid #ff3355;
+}
+.list-filter-tabs .filter-tab.right {
+      float: right;
+}
+.list-filter-tabs .filter-tab.right.active {
+        border-bottom: none;
+}
+
+
+/*# sourceMappingURL=6.005c1602edf263ba10b4.css.map*/
