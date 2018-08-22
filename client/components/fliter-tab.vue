@@ -12,8 +12,8 @@ export default {
     }
   },
   methods: {
-    tabItemClick(tab) {
-      this.active = tab.index;
+    tabItemClick (tab) {
+      this.active = tab.index
       this.$emit('filter-active', tab.index)
     }
   }
@@ -24,8 +24,8 @@ export default {
   display: block;
   overflow: hidden;
   margin-left: -20px;
+  list-style: none;
   .filter-tab{
-    display: inline-block;
     float: left;
     padding: 12px;
     &.active{

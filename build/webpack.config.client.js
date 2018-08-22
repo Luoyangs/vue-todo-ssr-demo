@@ -2,39 +2,82 @@ const merge = require('webpack-merge')
 const webpack = require('webpack')
 const path = require('path')
 const baseConfig = require('./webpack.config.base')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 const posix = (filename) => path.posix.join('static', filename) 
-const isDev = process.env.mode === 'development'
+// https://blog.csdn.net/icewfz/article/details/76640319
+const isDev = process.env.NODE_ENV === 'development'
+
+const clientConfig = {
+  module: {
+    rules: [
+      {
+        test: /\.(c|sc)ss$/,
+        oneOf: [
+          { // 这里匹配 `<style module>`
+            resourceQuery: /module/,
+            use: [
+              isDev ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
+              {
+                loader: 'css-loader',
+                options: {
+                  modules: true,
+                  localIdentName: isDev ? '[path]-[name]-[hash:base64:8]' : '[hash:base64:8]',
+                  camelCase: true
+                }
+              },
+              'sass-loader',
+              {
+                loader: 'postcss-loader',
+                options: {
+                  ident: 'postcss',
+                  sourceMap: true,
+                  plugins: [
+                    require('autoprefixer')()
+                  ]
+                }
+              }
+            ]
+          },
+          { // 这里匹配普通的 `<style>` 或 `<style scoped>`
+            use: [
+              isDev ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
+              'css-loader',
+              'sass-loader',
+              {
+                loader: 'postcss-loader',
+                options: {
+                  ident: 'postcss',
+                  sourceMap: true,
+                  plugins: [
+                    require('autoprefixer')()
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'VUE TODO SSR DEMO',
+      hash: true,
+      minify: {
+        collapseWhitespace: true
+      }
+    })
+  ]
+}
 
 let config
 
 if (isDev) {
-  config = merge(baseConfig, {
+  config = merge(baseConfig, clientConfig, {
     devtool: 'inline-source-map',
-    module: {
-      rules: [
-        {
-          test: /\.(c|sc)ss$/,
-          use: [
-            'style-loader',
-            'css-loader',
-            'sass-loader',
-            {
-              loader: 'postcss-loader',
-              options: {
-                ident: 'postcss',
-                sourceMap: true,
-                plugins: [
-                  require('autoprefixer')()
-                ]
-              }
-            }
-          ]
-        }
-      ]
-    },
     devServer: {
       contentBase: path.resolve(__dirname, 'dist'),
       port: 8000,
@@ -50,34 +93,13 @@ if (isDev) {
     ]
   })
 } else {
-  config = merge(baseConfig, {
+  console.log('this is production')
+  config = merge(baseConfig, clientConfig, {
     entry: {
       app: path.join(__dirname, '../client/main.js'),
       vendor: ['vue']
     },
     devtool: 'source-map',
-    module: {
-      rules: [
-        {
-          test: /\.(c|sc)ss$/,
-          use: [
-            MiniCssExtractPlugin.loader, // replace ExtractTextPlugin.extract({..})
-            'css-loader',
-            'sass-loader',
-            {
-              loader: 'postcss-loader',
-              options: {
-                ident: 'postcss',
-                sourceMap: true,
-                plugins: [
-                  require('autoprefixer')()
-                ]
-              }
-            }
-          ]
-        }
-      ]
-    },
     output: {
       path: path.join(__dirname, '../dist'),
       filename: posix('js/[name].[chunkhash].js'),
@@ -91,9 +113,6 @@ if (isDev) {
       new MiniCssExtractPlugin({
         filename: posix('css/[name].[contenthash].css'),
         chunkFilename: posix('css/[id].[contenthash].css')
-      }),
-      new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify('production')
       }),
       // 当文件内容发生变化时，生产文件对应的编译hash才会发生变化
       new webpack.HashedModuleIdsPlugin()

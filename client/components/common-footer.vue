@@ -6,10 +6,10 @@
 <style>
 .footer{
   position: absolute;
-  bottom: 100px;
+  bottom: 30px;
   width: 100%;
   font-size: 20px;
-  color: #666;
+  color: #aaa;
   text-align: center;
 }
 </style>

@@ -1,6 +1,5 @@
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   target: 'web',
@@ -18,30 +17,18 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(js|vue)$/,
+        enforce: 'pre',
+        loader: 'eslint-loader',
+        exclude: /node_modules/
+      },
+      {
         test: /\.vue$/,
         use: 'vue-loader'
       },
-      // {
-      //   test: /\.(c|sc)ss$/,
-      //   use: [
-      //     'sass-loader',
-      //     'css-loader',
-      //     isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-      //     {
-      //       loader: 'postcss-loader',
-      //       options: {
-      //         ident: 'postcss',
-      //         sourceMap: true,
-      //         plugins: [
-      //           require('autoprefixer')()
-      //         ]
-      //       }
-      //     }
-      //   ]
-      // },
       {
         test: /\.js$/,
-        use: ['babel-loader', 'cache-loader'],
+        use: 'babel-loader',
         exclude: /node_modules/
       },
       {
@@ -59,13 +46,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new VueLoaderPlugin(),
-    new HtmlWebpackPlugin({
-      title: 'VUE TODO SSR DEMO',
-      hash: true,
-      minify: {
-        collapseWhitespace: true
-      }
-    })
+    new VueLoaderPlugin()
   ]
 }

@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <common-header/>
-    <todo-list/>
-    <common-footer/>
+    <common-header></common-header>
+    <todo-list></todo-list>
+    <common-footer></common-footer>
   </div>
 </template>
 
