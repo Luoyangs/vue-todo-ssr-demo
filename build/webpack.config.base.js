@@ -2,17 +2,14 @@ const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
+  mode: process.env.NODE_ENV || 'production',
   target: 'web',
-  entry: path.join(__dirname, '../client/main.js'),
+  // entry: path.join(__dirname, '../client/main.js'),
+  entry: path.join(__dirname, '../client/client-entry.js'),
   output: {
     filename: '[name].bundle.js',
     path: path.join(__dirname, '../dist'),
-  },
-  resolve: {
-    extensions: ['.js', '.vue', '.json', '.jsx'],
-    alias: {
-      'vue$': 'vue/dist/vue.esm.js'
-    }
+    publicPath: 'http://127.0.0.1:8000/'
   },
   module: {
     rules: [

@@ -70,3 +70,40 @@ npm i husky -D
 
 "precommit": "npm run lint"  // 只检测不修复，需要手动修复才可以
 ```
+
+### 1.4 nodemon自动重启服务端
+```
+npm i nodemon -D
+```
+在根目录下添加nodemon.json文件
+```json
+{
+  "restartable": "rs",
+  "ignore": [ // 忽略重启的文件和文件夹
+    ".git",
+    "README.md",
+    "build/webpack.config.client.js",
+    "node_modules/**/node_modules",
+    "dist",
+    "client"
+  ],
+  "verbose": true,
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": "js json ejs"  // 监听的文件后缀名
+}
+```
+在package.json里面修改脚本
+```json
+"dev:server": "nodemon server/index.js"
+```
+
+### 1.5 合并客户端和服务端两个启动命令行
+```
+npm i concurrently -D
+```
+在package.json里面添加脚本
+```json
+"dev": "concurrently \"npm run dev:server\" \"npm run dev:client\""
+```

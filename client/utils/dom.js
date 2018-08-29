@@ -1,3 +1,3 @@
-export function addClass(className) {
+export function addClass (className) {
   return className
 }

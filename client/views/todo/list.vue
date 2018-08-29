@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.todoList">
+  <div class="todo-list">
     <div class="input__wrapper">
       <input type="text" v-model="title" ref="title" autofocus="autofocus" class="input-class" placeholder="Input Todo Item With Enter Press..." @keyup.enter="keyupEnter('foucs')">
       <input type="text" v-model="content" ref="content" class="input-subclass" placeholder="here is desc..." @keyup.enter="keyupEnter('sub')">
@@ -90,7 +90,7 @@ export default {
   }
 }
 </script>
-<style lang="scss" module>
+<style lang="scss">
 .todo-list{
   position: relative;
   top: 120px;
@@ -121,7 +121,7 @@ export default {
     border: none;
     outline: medium;
     text-indent: 4em;
-    
+
   }
   .input-subclass{
     font-size: 14px;

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <common-header></common-header>
-    <todo-list></todo-list>
+    <router-view />
     <common-footer></common-footer>
   </div>
 </template>
@@ -15,8 +15,7 @@ export default {
   },
   components: {
     CommonHeader: () => import('./components/common-header.vue'),
-    CommonFooter: () => import('./components/common-footer.vue'),
-    TodoList: () => import('./views/todo/list.vue')
+    CommonFooter: () => import('./components/common-footer.vue')
   }
 }
 </script>
@@ -31,4 +30,3 @@ export default {
    background: rgba(0, 0, 0, .35);
  }
  </style>
- 
